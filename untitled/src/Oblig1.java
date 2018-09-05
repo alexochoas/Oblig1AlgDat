@@ -49,9 +49,11 @@ public class Oblig1 {
 
         int[] a = {3,3,10,5,7,7,8,8,9};
 
-        int[] b = {5,3,7,4,3,5,7,8,6,7};
+        int[] b = {5,99,7,4,3,5,7,8,6,888};
 
         int[] h = {1,2,3,4,5,1};
+
+        System.out.println(maks(b, 0,1));
 
         System.out.println(antallUlikeUsortert(b));
         }
@@ -65,6 +67,7 @@ public class Oblig1 {
     }
 
 
+    //maks metoden, men med fra og til grenser.
     public static int maks(int[] a){
 
         if(a.length == 0){
@@ -80,10 +83,52 @@ public class Oblig1 {
 
         }
 
+        for (int element:a) {
+            System.out.print(element+ " ");
+
+        }
+        System.out.println();
+
         return a[a.length-1];
 
 
     }
+
+
+    public static int maks(int[] a, int fra, int til){
+
+        if(a.length == 0){
+            throw new NoSuchElementException("Array is empty.");
+        }
+
+        if(fra > til){
+            throw new IllegalArgumentException("Ikke lovlige grenser.");
+        }
+
+
+
+
+        for(int i = fra;  i < til-1; i++){
+
+            if (a[i] > a[i+1]){
+                bytt(a, i,i+1);
+            }
+
+        }
+
+        return a[til-1];
+
+
+    }
+
+    //Metode som
+    public static void min(int[] a, int fra, int til){
+
+
+
+
+    }
+
 
 
     public static int ombyttinger(int[] a){
@@ -223,7 +268,7 @@ public class Oblig1 {
                 if(a[k] == a[i]){
                     n--;
                     b++;
-                    
+
                 }
             }
 
@@ -236,6 +281,24 @@ public class Oblig1 {
 
 
         return n;
+    }
+
+
+    public static void delSortering(int[] a){
+
+        //hjelpevariabel for partall
+        int p = a.length-1;
+
+        //hjelpevariavel for oddetall
+        int o = 0;
+
+        for(int i = 0; i < a.length; i++){
+
+
+        }
+
+
+
     }
 
 
