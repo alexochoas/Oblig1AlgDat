@@ -14,7 +14,7 @@ public class Oblig1 {
        // int[] best = {1,2,3,4,5,6,7,8,9};
        // int[] worst = {9,8,7,6,5,4,3,2,1};
 
-        int[] h = new int[1000];
+        /*int[] h = new int[1000];
 
 
         for (int i = 0; i<h.length; i++){
@@ -45,7 +45,15 @@ public class Oblig1 {
 
         System.out.println("gjennomsnittet er " +gjennomsnitt);
 
+*/
 
+        int[] a = {3,3,10,5,7,7,8,8,9};
+
+        int[] b = {5,3,7,4,3,5,7,8,6,7};
+
+        int[] h = {1,2,3,4,5,1};
+
+        System.out.println(antallUlikeUsortert(b));
         }
 
 
@@ -115,6 +123,57 @@ public class Oblig1 {
 
 
 
+    public static int antallUlikeSortert(int[] a){
+
+        if (!sorted(a)){
+            throw new IllegalStateException("Tabellen er ikke sortert stigende");
+        }
+
+        if(a.length == 0){
+            return 0;
+        }
+
+        // Teller antall ulike
+        int n = 1;
+
+        for(int i = 0; i < a.length-1; i++){
+
+            if(a[i] != a[i+1]){
+                n++;
+            }
+
+        }
+
+        return n;
+
+
+    }
+
+    public static boolean sorted(int[] a){
+
+        boolean sorted = true;
+
+        for(int i = 0; i < a.length-1; i++){
+
+            if(a[i] > a[i+1]){
+                sorted = false;
+            }
+
+
+        }
+
+        return sorted;
+
+
+
+
+
+    }
+
+
+
+
+
 
 
 
@@ -147,6 +206,36 @@ public class Oblig1 {
 
 
         }
+    }
+
+
+    public static int antallUlikeUsortert(int[] a){
+
+        //Antall ulike
+        int n = a.length;
+
+        //Antall treff indre loop
+        int b = 0;
+        for(int i = 1; i < a.length; i++){
+
+
+            for(int k = i-1; k >= 0 && b < 1; k--){
+                if(a[k] == a[i]){
+                    n--;
+                    b++;
+                    
+                }
+            }
+
+            b = 0;
+
+
+        }
+
+
+
+
+        return n;
     }
 
 
