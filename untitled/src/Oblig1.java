@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -53,9 +54,15 @@ public class Oblig1 {
 
         int[] h = {1,2,3,4,5,1};
 
-        System.out.println(maks(b, 0,1));
+        int[] tab = randPerm(10);
 
-        System.out.println(antallUlikeUsortert(b));
+        //System.out.println(maks(b, 0,1));
+
+        //System.out.println(antallUlikeUsortert(b));
+
+        System.out.println("Array før: " + Arrays.toString(b));
+        rotasjon(b, 4);
+        System.out.println("Array etter: " + Arrays.toString(b));
         }
 
 
@@ -292,15 +299,95 @@ public class Oblig1 {
         //hjelpevariavel for oddetall
         int o = 0;
 
-        for(int i = 0; i < a.length; i++){
+        int ap = 0;
+        // antall oddetall
+        for(int i = 0; i < a.length; i++) {
+            if(a[i] % 2 == 0){
+                ap++;
+            }
+        }
+
+        for(int i = a.length-1; i > 0 && ap >= 0; i--){
+            if(a[i] % 2 != 0){
+                for (int k = i; k >= 0; k--){
+                    if (a[k] % 2 == 0){
+                        bytt(a, k, i);
+                    }
+                }
+            }
+
+            ap--;
 
 
         }
 
 
+        System.out.println(ap);
+
+
+
 
     }
 
+
+    public static void rotasjon(int[] a){
+
+
+        int tmp = a[a.length-1];
+
+        for(int i = a.length - 2; i >= 0; i--){
+            a[i+1] = a[i];
+        }
+
+        a[0] = tmp;
+
+    }
+
+
+
+    public static void rotasjon(int[] a, int k) {
+
+
+
+
+
+// Dersom k er positiv
+        if(k > 0) {
+            int tmp = a[a.length - 1];
+
+            for (int i = a.length - 2; i >= 0; i--) {
+                a[i + 1] = a[i];
+            }
+
+            a[0] = tmp;
+
+            k--;
+            if (k > 0) {
+                rotasjon(a, k);
+            }
+        } else {
+
+            // dersom k er negativ
+
+            int tmp = a[0];
+
+            for (int i = 1; i < a.length; i++){
+
+                a[i-1] = a[i];
+            }
+
+            a[a.length-1] = tmp;
+
+            k++;
+
+            if(k < 0){
+                rotasjon(a, k);
+
+            }
+
+        }
+
+    }
 
 
 }
