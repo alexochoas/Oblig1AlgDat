@@ -55,6 +55,11 @@ public class Oblig1 {
 
         int[] h = {1,2,3,4,5,1};
 
+
+        int[] pp = {6,2,4,6,9,1,4,9,10};
+
+        System.out.println("antall ulike sortert er " + antallUlikeUsortert(pp));
+
         int[] tab = randPerm(10);
 
         //System.out.println(maks(b, 0,1));
@@ -70,8 +75,10 @@ public class Oblig1 {
         //System.out.println(flett(strings));
 
 
-        System.out.println(Arrays.toString(indekssortering(b)));
 
+        String string = "ABBAAH";
+
+        System.out.println(inneholdt("AGG", "GGGGGAGGGGG"));
 
 
         }
@@ -278,24 +285,22 @@ public class Oblig1 {
         int n = a.length;
 
         //Antall treff indre loop
-        int b = 0;
+        int treff = 0;
         for(int i = 1; i < a.length; i++){
 
 
-            for(int k = i-1; k >= 0 && b < 1; k--){
+            for(int k = i-1; k >= 0 && treff < 1; k--){
                 if(a[k] == a[i]){
                     n--;
-                    b++;
+                    treff++;
 
                 }
             }
 
-            b = 0;
+            treff = 0;
 
 
         }
-
-
 
 
         return n;
@@ -341,10 +346,10 @@ public class Oblig1 {
     }
 
 
-    public static void rotasjon(int[] a){
+    public static void rotasjon(char[] a){
 
 
-        int tmp = a[a.length-1];
+        char tmp = a[a.length-1];
 
         for(int i = a.length - 2; i >= 0; i--){
             a[i+1] = a[i];
@@ -356,7 +361,7 @@ public class Oblig1 {
 
 
 
-    public static void rotasjon(int[] a, int k) {
+    public static void rotasjon(char[] a, int k) {
 
 
 
@@ -364,7 +369,7 @@ public class Oblig1 {
 
 // Dersom k er positiv
         if(k > 0) {
-            int tmp = a[a.length - 1];
+            char tmp = a[a.length - 1];
 
             for (int i = a.length - 2; i >= 0; i--) {
                 a[i + 1] = a[i];
@@ -380,7 +385,7 @@ public class Oblig1 {
 
             // dersom k er negativ
 
-            int tmp = a[0];
+            char tmp = a[0];
 
             for (int i = 1; i < a.length; i++){
 
@@ -513,11 +518,11 @@ public class Oblig1 {
         }
 
 
-        for(int i = 0; i < a.length; i++){
+        for(int i = 0; i < hjelpetabell.length; i++){
 
-            indekser[i] = minIndex(a);
+            indekser[i] = minIndex(hjelpetabell);
             // Setter elementet til minste verdien til int.
-            a[indekser[i]] = 2147483647;
+            hjelpetabell[indekser[i]] = 2147483647;
 
         }
 
@@ -547,12 +552,171 @@ public class Oblig1 {
 
         }
 
-
         return m;
+
+    }
+
+
+    public static int[] tredjeMin(int[] a){
+
+        if (a.length < 3){
+            throw new NoSuchElementException("Arrayet må ha minst tre verdier");
+
+        }
+
+        int[] hentIndex = {a[0], a[1], a[2]};
+
+        hentIndex = indekssortering(hentIndex);
+
+        int tmp = 0;
+
+        int min = hentIndex[0];
+        int nmin = hentIndex[1];
+        int tnmin = hentIndex[2];
+
+        int minVerdi = a[min];
+        int nestMinVerdi = a[nmin];
+        int tredMinstVerdi = a[tnmin];
+
+        System.out.println(minVerdi);
+        System.out.println(nestMinVerdi);
+        System.out.println(tredMinstVerdi);
+
+
+        for(int i = 3; i < a.length; i++){
+
+            if(a[i] < tredMinstVerdi){
+
+                if(a[i] < nestMinVerdi){
+
+                    if (a[i] < minVerdi){
+
+
+                        //ny tred minst
+
+                        tnmin = nmin;
+                        tredMinstVerdi = nestMinVerdi;
+
+
+                        //ny nest min
+                        nmin = min;
+                        nestMinVerdi = minVerdi;
+
+
+
+                        // ny min
+                        min = i;
+                        minVerdi = a[i];
+
+                    } else{
+
+                        //ny tred mest min
+                        tnmin = nmin;
+                        tredMinstVerdi = nestMinVerdi;
+
+                        // ny nest min
+                        nmin = i;
+                        nestMinVerdi = a[i];
+                    }
+
+                } else {
+
+                    // ny tred min
+                    tnmin = i;
+                    tredMinstVerdi = a[i];
+                }
+            }
+
+
+
+
+
+
+
+        }
+        System.out.println(minVerdi);
+        System.out.println(nestMinVerdi);
+        System.out.println(tredMinstVerdi);
+
+        return new int[] {min, nmin, tnmin};
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
     }
+
+
+
+
+
+
+
+
+
+public static boolean inneholdt(String a, String b){
+
+
+        char[] alfabet = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Æ','Ø','Å'};
+
+
+        int[] c = new int[alfabet.length];
+
+        for(int i = 0; i < a.length(); i++) {
+
+            for(int k = 0; k < alfabet.length; k++){
+
+                if(a.charAt(i) == alfabet[k]){
+                    c[k]++;
+
+
+                }
+
+            }
+
+        }
+
+
+        for(int i = 0; i < b.length(); i++){
+
+            for(int k = 0; k < alfabet.length; k++){
+
+                if(b.charAt(i) == alfabet[k]){
+
+                    c[k]--;
+                }
+
+
+            }
+
+        }
+
+        //
+
+        for(int i = 0; i < c.length; i++){
+
+            if(c[i] > 0){
+                return false;
+            }
+
+        }
+
+        return true;
+
+
+}
+
+
 
 
 

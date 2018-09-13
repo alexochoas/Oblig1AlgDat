@@ -27,8 +27,8 @@ public class Oblig1Test {
         //antallFeil += oppgave6();
         //antallFeil += oppgave7();
         //antallFeil += oppgave8();
-        //antallFeil += oppgave9();
-        //antallFeil += oppgave10();
+        antallFeil += oppgave9();
+        antallFeil += oppgave10();
 
         if (antallFeil == 0) {
             System.out.println("Gratulerer!! Du passerte testen!");
@@ -146,7 +146,7 @@ public class Oblig1Test {
 
     ///// Oppgave 3 //////////////////////////////////////
 
-   /* public static int oppgave3() {
+    public static int oppgave3() {
         int antallFeil = 0;
 
         int[] a = {};   // skal ikke kaste unntak her!
@@ -186,7 +186,7 @@ public class Oblig1Test {
 
     ///// Oppgave 4 //////////////////////////////////////
 
-    public static int oppgave4() {
+    /*public static int oppgave4() {
         int antallFeil = 0;
 
         int[] a = {};   // skal ikke kaste unntak her!
@@ -339,7 +339,7 @@ public class Oblig1Test {
         }
 
         return antallFeil;
-    }
+    }*/
 
     ///// Oppgave 5 //////////////////////////////////////
 
@@ -386,7 +386,7 @@ public class Oblig1Test {
 
     ///// Oppgave 6 //////////////////////////////////////
 
-    public static int oppgave6() {
+    /*public static int oppgave6() {
         int antallFeil = 0;
 
         char[] a = {};
@@ -621,7 +621,7 @@ public class Oblig1Test {
         }
 
         return antallFeil;
-    }
+    }*/
 
     ///// Oppgave 8 //////////////////////////////////////
 
@@ -819,7 +819,7 @@ public class Oblig1Test {
 
     ///// Oppgave 10 //////////////////////////////////////
 
-    public static int oppgave10() {
+     public static int oppgave10() {
         int antallFeil = 0;
         boolean b = false;
 
@@ -996,6 +996,6 @@ public class Oblig1Test {
         }
 
         return a;                        // permutasjonen returneres
-    }*/
+    }
 
 } // class Oblig1Test
