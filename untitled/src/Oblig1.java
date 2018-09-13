@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -12,53 +11,49 @@ public class Oblig1 {
 
         System.out.println("hei");
 
+
+        System.out.println(-4%2);
+
        // int[] a = {1,500000,500000000,7,23400};
        // int[] best = {1,2,3,4,5,6,7,8,9};
        // int[] worst = {9,8,7,6,5,4,3,2,1};
 
-        /*int[] h = new int[1000];
 
 
-        for (int i = 0; i<h.length; i++){
-            h[i] = i;
-        }
+
 
         //System.out.println(maks(a));
         //System.out.println(ombyttinger(best));
         //System.out.println(ombyttinger(worst));
 
         double sum = 0;
-        double ombyttinger;
         int teller = 0;
 
-        for(int i = 0; i<1000; i++){
-            randPerm(h);
-            printArray(h);
-            ombyttinger = ombyttinger(h);
-            System.out.println("antall bytter " +
-                    ombyttinger);
-            System.out.println(ombyttinger);
-            sum = sum + ombyttinger;
-            System.out.println(sum);
+
+
+        for(int i = 0; i < 100; i++){
+
+            sum = sum + ombyttinger(Oblig1Test.randPerm(100000));
+            //System.out.println(sum);
 
         }
 
-        double gjennomsnitt = sum/1000;
+        System.out.println(sum/100);
 
-        System.out.println("gjennomsnittet er " +gjennomsnitt);
 
-*/
+
+
 
         int[] a = {3,3,10,5,7,7,8,8,9};
 
         int[] b = {5,99,7,4,3,5,7,8,6,888};
 
-        int[] h = {1,2,3,4,5,1};
 
 
-        int[] pp = {6,2,4,6,9,1,4,9,10};
+        int[] pp = {1, 2, 3, 4, 5, 6};
 
-        System.out.println("antall ulike sortert er " + antallUlikeUsortert(pp));
+        delsortering(pp);
+
 
         int[] tab = randPerm(10);
 
@@ -78,7 +73,8 @@ public class Oblig1 {
 
         String string = "ABBAAH";
 
-        System.out.println(inneholdt("AGG", "GGGGGAGGGGG"));
+
+
 
 
         }
@@ -120,6 +116,11 @@ public class Oblig1 {
     }
 
 
+    //Når det storste tallet i arrayet ligger forst vil det vaere flest ombyttinger.
+    //Det er faerrest når arrayet er sortert etter stigende rekkefølge.
+    //I forgold til maks metoder vi har sett på tidligere er denne svært inneffektiv for store arrayer.
+
+
     public static int maks(int[] a, int fra, int til){
 
         if(a.length == 0){
@@ -156,6 +157,10 @@ public class Oblig1 {
 
 
 
+
+    // I gjennomsnitt blir antall ombyttinger lik n-hn. Der n er antall elementer i arrayet, og hn er
+    // det harmoniske tallet log(n) + 0,557.
+    //
     public static int ombyttinger(int[] a){
 
         if(a.length == 0){
@@ -169,8 +174,8 @@ public class Oblig1 {
         for(int i = 0;  i < a.length-1; i++){
 
             if (a[i] > a[i+1]){
+                bytt(a, i,i+1);
                 n++;
-                //bytt(a, i,i+1);
             }
 
         }
@@ -307,38 +312,103 @@ public class Oblig1 {
     }
 
 
-    public static void delSortering(int[] a){
+    public static void delsortering(int[] a){
 
-        //hjelpevariabel for partall
-        int p = a.length-1;
 
-        //hjelpevariavel for oddetall
-        int o = 0;
+        int oddetallIndeks = 0;
 
-        int ap = 0;
-        // antall oddetall
-        for(int i = 0; i < a.length; i++) {
-            if(a[i] % 2 == 0){
-                ap++;
+        int partallIndeks = 0;
+
+        for(int i = 0;  i < a.length; i++){
+
+            if (a[i] % 2 != 0){
+                bytt(a, i, oddetallIndeks);
+                oddetallIndeks++;
+            } else{
+
+                partallIndeks++;
             }
         }
 
-        for(int i = a.length-1; i > 0 && ap >= 0; i--){
-            if(a[i] % 2 != 0){
-                for (int k = i; k >= 0; k--){
-                    if (a[k] % 2 == 0){
-                        bytt(a, k, i);
+        if (partallIndeks == 0 || oddetallIndeks == 0){
+
+            kvikkSort(a, 0, a.length-1);
+
+        } else {
+
+            kvikkSort(a,oddetallIndeks, a.length-1);
+            kvikkSort(a, 0, oddetallIndeks-1);
+        }
+
+
+
+
+
+
+
+
+
+    }
+
+
+    public static void kvikkSort(int[] a, int v, int h){
+
+
+        if(h-v > 0 ) {
+            int pivot = h;
+
+            int wall = v;
+
+
+
+                /*while(v<=h && wall <= h) {
+
+                    while (a[v] >= a[pivot]) {
+                        v++;
                     }
-                }
+
+                    bytt(a, v, wall);
+                    wall++;
+
+                }*/
+
+
+                for(int i = v; i < h;){
+
+                    if(a[i] < a[pivot]){
+                        bytt(a, i, wall);
+                        wall++;
+                        i++;
+                    } else {
+                        i++;
+
+                    }
+
+
+
+
             }
 
-            ap--;
+
+            bytt(a,pivot,wall);
+
+
+            //setter nye venstre og høyre grenser
+
+
+
+
+            kvikkSort(a, v, wall - 1);
+
+
+            h = pivot;
+            kvikkSort(a, wall +1, h);
+
+
+
 
 
         }
-
-
-        System.out.println(ap);
 
 
 
@@ -713,8 +783,10 @@ public static boolean inneholdt(String a, String b){
 
         return true;
 
-
 }
+
+
+
 
 
 
