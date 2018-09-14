@@ -1,12 +1,11 @@
+
+//Alexander Svendberg s325887
+
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class Oblig1 {
-
-
-
-
 
 
 
