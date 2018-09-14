@@ -7,79 +7,10 @@ public class Oblig1 {
 
 
 
-    public static void main(String[] args){
-
-        System.out.println("hei");
-
-
-        System.out.println(-4%2);
-
-       // int[] a = {1,500000,500000000,7,23400};
-       // int[] best = {1,2,3,4,5,6,7,8,9};
-       // int[] worst = {9,8,7,6,5,4,3,2,1};
 
 
 
-
-
-        //System.out.println(maks(a));
-        //System.out.println(ombyttinger(best));
-        //System.out.println(ombyttinger(worst));
-
-        double sum = 0;
-        int teller = 0;
-
-
-
-        for(int i = 0; i < 100; i++){
-
-            sum = sum + ombyttinger(Oblig1Test.randPerm(100000));
-            //System.out.println(sum);
-
-        }
-
-        System.out.println(sum/100);
-
-
-
-
-
-        int[] a = {3,3,10,5,7,7,8,8,9};
-
-        int[] b = {5,99,7,4,3,5,7,8,6,888};
-
-
-
-        int[] pp = {1, 2, 3, 4, 5, 6};
-
-        delsortering(pp);
-
-
-        int[] tab = randPerm(10);
-
-        //System.out.println(maks(b, 0,1));
-
-        //System.out.println(antallUlikeUsortert(b));
-
-        String s = "ABCDEETTTTT";
-        String t = "HHHHHH";
-
-        //System.out.println(flett(s,t));
-
-        String[] strings = {"AM ","L","GEDS","ORATKRR","","R TRTE","IO","TGAUU"};
-        //System.out.println(flett(strings));
-
-
-
-        String string = "ABBAAH";
-
-
-
-
-
-        }
-
-
+    // metode for å bytte to elementer i et array.
     public static void bytt(int[] a, int i, int j){
 
         int tmp = a[i];
@@ -273,15 +204,7 @@ public class Oblig1 {
     } // randPerm
 
 
-    public static void printArray(int[] a){
 
-        for(int i: a){
-
-            System.out.print(i + " ");
-
-
-        }
-    }
 
 
     public static int antallUlikeUsortert(int[] a){
@@ -419,26 +342,10 @@ public class Oblig1 {
     public static void rotasjon(char[] a){
 
 
-        char tmp = a[a.length-1];
-
-        for(int i = a.length - 2; i >= 0; i--){
-            a[i+1] = a[i];
-        }
-
-        a[0] = tmp;
-
-    }
 
 
 
-    public static void rotasjon(char[] a, int k) {
-
-
-
-
-
-// Dersom k er positiv
-        if(k > 0) {
+        if(a.length > 1) {
             char tmp = a[a.length - 1];
 
             for (int i = a.length - 2; i >= 0; i--) {
@@ -446,34 +353,126 @@ public class Oblig1 {
             }
 
             a[0] = tmp;
-
-            k--;
-            if (k > 0) {
-                rotasjon(a, k);
-            }
-        } else {
-
-            // dersom k er negativ
-
-            char tmp = a[0];
-
-            for (int i = 1; i < a.length; i++){
-
-                a[i-1] = a[i];
-            }
-
-            a[a.length-1] = tmp;
-
-            k++;
-
-            if(k < 0){
-                rotasjon(a, k);
-
-            }
-
         }
 
     }
+
+
+
+
+
+    public static void rotasjon(char[] a, int k){
+
+
+
+        if(a.length < 2) return;
+
+
+        //Sjekker om tabellen skal roteres mot klokkan.
+        if((k %= a.length) < 0) {
+           k += a.length;
+       }
+
+       //Finner antall sykler som trengs.
+       int s = gcd(a.length, k);
+
+
+        for(int d = 0; d < s; d++){
+
+            //holder på verdien til første element
+            char tmp = a[d];
+
+            for(int i = d - k, j = d; i != d; i -=k){
+
+                if(i < 0) {
+                    i += a.length;
+                }
+                a[j] = a[i];
+                j = i;
+            }
+
+
+
+            a[d + k] = tmp;
+        }
+
+
+
+
+
+
+
+    }
+
+
+
+    //Finner største felles divisor
+    public static int gcd(int a, int b){
+
+        return b == 0 ? a : gcd(b, a % b);
+
+    }
+
+
+
+    public static void bytt(char[] a, int i, int j){
+
+            char temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+
+        }
+
+
+
+
+
+
+    /*public static void rotasjon(char[] a, int k) {
+
+
+
+
+
+// Dersom k er positiv
+        if(a.length > 1) {
+            if (k > 0) {
+                char tmp = a[a.length - 1];
+
+                for (int i = a.length - 2; i >= 0; i--) {
+                    a[i + 1] = a[i];
+                }
+
+                a[0] = tmp;
+
+                k--;
+                if (k > 0) {
+                    rotasjon(a, k);
+                }
+            } else {
+
+                // dersom k er negativ
+
+                char tmp = a[0];
+
+                for (int i = 1; i < a.length; i++) {
+
+                    a[i - 1] = a[i];
+                }
+
+                a[a.length - 1] = tmp;
+
+                k++;
+
+                if (k < 0) {
+                    rotasjon(a, k);
+
+                }
+
+            }
+        }
+        }
+    }*/
 
 
     public static String flett(String s, String t){
@@ -504,21 +503,18 @@ public class Oblig1 {
 
         }
 
-        System.out.println(" si: " + s_index + " ti: " + t_index);
 
-        System.out.println(i);
 
 
         if(s_index == s.length() && t_index == t.length()){
 
-            System.out.println("ferdig");
+
 
         }
 
 
         //Legger til elementene til overs
 
-        System.out.println(String.valueOf(flettet));
 
 
 
@@ -526,7 +522,6 @@ public class Oblig1 {
 
         if(s_index == s.length() && t_index != t.length()){
 
-            System.out.println("legger til fra t");
 
             for(i = i; i < flettet.length; i++){
                 flettet[i] = t.charAt(t_index);
@@ -534,7 +529,6 @@ public class Oblig1 {
             }
 
         } else if(t_index == t.length() && s_index != s.length()){
-            System.out.println("legger til fra s");
 
             for(i = i; i < flettet.length; i++){
                 flettet[i] = s.charAt(s_index);
@@ -648,9 +642,6 @@ public class Oblig1 {
         int nestMinVerdi = a[nmin];
         int tredMinstVerdi = a[tnmin];
 
-        System.out.println(minVerdi);
-        System.out.println(nestMinVerdi);
-        System.out.println(tredMinstVerdi);
 
 
         for(int i = 3; i < a.length; i++){
@@ -704,9 +695,7 @@ public class Oblig1 {
 
 
         }
-        System.out.println(minVerdi);
-        System.out.println(nestMinVerdi);
-        System.out.println(tredMinstVerdi);
+
 
         return new int[] {min, nmin, tnmin};
 
